@@ -4,7 +4,8 @@
 using namespace std;
 
 int main(){
-    int rows, cols, room_density, room_w, room_h, room_stdev, spacy, pillars;
+    int rows, cols, room_density, room_w, room_h, room_stdev, 
+        doorsy, max_doors, spacy, pillars;
     string input;
     while(true){
     	cout << "ROWS(21): ";
@@ -21,9 +22,13 @@ int main(){
     	cin >> room_h;
     	cout << "ROOM DEVIATION(2): ";
     	cin >> room_stdev;
-    	cout << "SPACINESS(10): ";
+        cout << "EXTRA DOOR CHANCE(4)%: ";
+        cin >> doorsy;
+        cout << "MAX-DOORS/AREA(2) ";
+        cin >> max_doors;
+    	cout << "SPACINESS(10)%: ";
     	cin >> spacy;
-    	cout << "PILLARS(0): ";
+    	cout << "PILLARS(0)%: ";
     	cin >> pillars;
     	while(true){
     		cout << "CREATE? ";
@@ -32,10 +37,11 @@ int main(){
     		if (input == "yes"){
     			WorldGen maker{rows, cols};
     			while (true){
-					maker.generate(room_density, room_w, room_h, room_stdev, spacy, pillars);
+                    cout << endl;
+					maker.generate(room_density, room_w, room_h, room_stdev, 
+                            spacy, doorsy, max_doors, pillars);
 					cout << "AGAIN? ";
 					getline(cin,input);
-					cout << input << endl;
 					if (input == "yes") continue;
 					else break;
 				}

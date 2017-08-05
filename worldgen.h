@@ -56,7 +56,7 @@ class WorldGen{
     bool isConnector(Cell &c);
     int countMergedIDs(Connector &ktor);
     void buildConnectors(std::vector<Connector> &ktors, int chance=4, int max_extra=2);
-    void placeConnectors();
+    void placeConnectors(int doorsy=4, int max_extra=2);
 
     bool isPillar(Cell &c);
     void removePillars(int chance=100);
@@ -67,7 +67,8 @@ public:
 
     std::string generate(
         int room_density=250, int room_w=11, int room_h=6, 
-        int room_stdev=2, int spacy=10, int pillars=0);
+        int room_stdev=2, int spacy=10, int doorsy=4,
+        int max_extra=2, int pillars=0);
 
     friend struct Connector;
 };

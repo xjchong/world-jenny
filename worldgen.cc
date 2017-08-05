@@ -222,7 +222,7 @@ void WorldGen::buildConnectors(vector<Connector> &ktors, int chance, int max_ext
 }
 
 
-void WorldGen::placeConnectors(){
+void WorldGen::placeConnectors(int chance, int max_extra){
     vector<Connector> ktors;
     for (int row=1; row<rows-1; ++row){
         for (int col=1; col<cols-1; ++col){
@@ -233,7 +233,7 @@ void WorldGen::placeConnectors(){
     }
     random_shuffle(ktors.begin(), ktors.end());
     merged.insert(ktors[0].id[0]);
-    while(!ktors.empty()) buildConnectors(ktors);
+    while(!ktors.empty()) buildConnectors(ktors, chance, max_extra);
 }
 
 
@@ -265,7 +265,8 @@ WorldGen::WorldGen(const int rows, const int cols)
 
 std::string WorldGen::generate(
     int room_density, int room_w, int room_h, 
-    int room_stdev, int spacy, int pillars){
+    int room_stdev, int spacy, int doorsy,
+    int max_doors, int pillars){
     merged.clear();
     grid.resize(rows*cols);
     for (int row=0; row<rows; ++row){
@@ -275,7 +276,7 @@ std::string WorldGen::generate(
     }
     placeRooms(room_density, room_w, room_h, room_stdev);
     placeCorridors(spacy);
-    placeConnectors();
+    placeConnectors(doorsy, max_doors);
     removeDeadEnds();
     removePillars(100-pillars);
     string world = "";
