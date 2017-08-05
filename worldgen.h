@@ -1,3 +1,6 @@
+#ifndef WORLD_JENNY_H
+#define WORLD_JENNY_H
+
 #include <vector>
 #include <set>
 #include <string>
@@ -74,5 +77,5 @@ public:
 };
 
 
-
+#endif
 
